@@ -1,0 +1,45 @@
+
+.container{
+    max-width: 200px;
+    margin: 3em;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#username{
+    border-radius: 3px;
+    padding:5px;
+    max-width: 400px;
+}
+
+#UserId{
+    border-radius: 3px;
+    padding:5px;
+    max-width: 400px;
+}
+
+.confirmation{
+    display: none;
+    padding: 10px 5px;
+    margin: 5px;
+    background-color: rgb(43, 255, 0);
+    border-radius: 3px;
+    box-shadow: 2px;
+}
+
+.del{
+    border-radius: 5px;
+    background-color: crimson;
+}
+.del:hover{
+    background-color: red;
+    color:antiquewhite;
+}
+
+.notify{
+    display: none;
+    background-color: red;
+    border-radius: 5px;
+    padding: 10px 5px;
+    margin: 5px;
+}
