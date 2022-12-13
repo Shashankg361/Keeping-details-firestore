@@ -5,6 +5,8 @@ const ack = document.querySelector('.confirmation');
 var Username,UserId;
 let d = new Date();
 
+// Initial page loading with firestore database
+readDatabase();
 
 // Accepting the data from the user
 form.addEventListener('submit',UserData);
@@ -21,7 +23,6 @@ function UserData(e){
     if(Userdets.Name != '' && Userdets.Id != ''){
         notify.style.display = 'none';
         writeDatabase(Userdets);
-        readDatabase();
         form.reset();
         
     }else{
@@ -65,6 +66,7 @@ function writeDatabase(Userdets){
         ack.style.display = 'block';
         changingStyle(ack);
         console.log(ackn.id);
+        getRecentData(ackn.id);
     }).catch(err=>{
         console.log(err);
     })
@@ -101,7 +103,14 @@ function scrollToTop(){
     scrollTo(0,0);
 }
 
-
+// Function to get a data of which id is provided
+function getRecentData(id){
+    db.collection('UserDets').doc(id).get().then((sanpshot)=>{
+        console.log(sanpshot.doc[0].data);
+    }).catch(err=>{
+        console.log(err);
+    })
+}
 
 
 
