@@ -30,23 +30,23 @@ function UserData(e){
     }
     
 }
- let HTML = '';
+let HTML = '';
 // to get Data from the database 
 function readDatabase(){
         db.collection('UserDets').get().then((sanpshot)=>{
         //Data of the database
         //console.log(sanpshot.docs[0].data());
-        sanpshot.docs.forEach(element => {
-            console.log(element.data());
-            console.log(element.data().Name);
+        sanpshot.docs.forEach(sanpshot => {
+            //console.log(sanpshot.data());
+            //console.log(sanpshot.data().Name);
             HTML+= `
-            <li Data-id="${element.id}">
-            <span style="font-weight:bold; font-size:20px">ID :-</span> ${element.data().Id}<br>
-            <span style="font-weight:bold; font-size:20px">Name :-</span> ${element.data().Name}<br>
-            <span style="font-weight:bold; font-size:20px">Date of joining :-</span> ${element.data().JoiningDate.toDate()}<br>
+            <li Data-id="${sanpshot.id}">
+            <span style="font-weight:bold; font-size:20px">ID :-</span> ${sanpshot.data().Id}<br>
+            <span style="font-weight:bold; font-size:20px">Name :-</span> ${sanpshot.data().Name}<br>
+            <span style="font-weight:bold; font-size:20px">Date of joining :-</span> ${sanpshot.data().JoiningDate.toDate()}<br>
             <button class="del">Delete</button>
             </li>`
-            /*let d = new Date(element.data().JoiningDate.toDate());
+            /*let d = new Date(sanpshot.data().JoiningDate.toDate());
             console.log(d);*/
             
         });
@@ -65,7 +65,6 @@ function writeDatabase(Userdets){
         ack.innerHTML='Your ID is been succesfully Saved';
         ack.style.display = 'block';
         changingStyle(ack);
-        console.log(ackn.id);
         getRecentData(ackn.id);
     }).catch(err=>{
         console.log(err);
@@ -92,10 +91,10 @@ function deleteData(e){
 }
 
 // Setting intervals
-function changingStyle(elementAccess){
+function changingStyle(sanpshotAccess){
     setInterval(() => {
-        elementAccess.style.display = 'none';
-    }, 5000);
+        sanpshotAccess.style.display = 'none';
+    }, 10000);
 }
 
 // Scroll TO top
@@ -103,10 +102,18 @@ function scrollToTop(){
     scrollTo(0,0);
 }
 
+let html = '';
 // Function to get a data of which id is provided
 function getRecentData(id){
     db.collection('UserDets').doc(id).get().then((sanpshot)=>{
-        console.log(sanpshot.doc[0].data);
+            html= `
+            <li Data-id="${sanpshot.id}">
+            <span style="font-weight:bold; font-size:20px">ID :-</span> ${sanpshot.data().Id}<br>
+            <span style="font-weight:bold; font-size:20px">Name :-</span> ${sanpshot.data().Name}<br>
+            <span style="font-weight:bold; font-size:20px">Date of joining :-</span> ${sanpshot.data().JoiningDate.toDate()}<br>
+            <button class="del">Delete</button>
+            </li>`
+        List.innerHTML += html;
     }).catch(err=>{
         console.log(err);
     })
